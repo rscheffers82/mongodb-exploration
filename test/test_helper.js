@@ -22,3 +22,7 @@ mongoose.connection
 // A Schema tells exactly which fields each record needs to have.
 // In a Schema you label the fieds and of which type they are.
 // Schema tells the model which properties are required
+
+beforeEach( (done) => {
+  mongoose.connection.collections.users.drop( () => done() );
+});

@@ -14,5 +14,5 @@ module.exports = User;
 
 // Import statements at the top
 // Define hte Schema
-// Export the model
 // Create the model
+// Export the model
