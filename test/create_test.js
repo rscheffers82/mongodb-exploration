@@ -11,7 +11,7 @@ describe('Creating records', () => {
     roy.save()
       .then( () => {
         // Has the record been saved?
-        assert(roy.isNew);
+        assert(!roy.isNew);
         done();
       });
 
