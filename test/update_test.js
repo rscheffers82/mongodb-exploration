@@ -33,15 +33,26 @@ function assertName(operation, done) {
     assertName( roy.update({ name: 'R.G.G. Scheffers' }), done );
   });
 
-  // it('', () => {
-  //
-  // });
-  //
-  // it('', () => {
-  //
-  // });
-  //
-  // it('', () => {
-  //
-  // });
+  it('A model class can update', (done) => {
+    assertName(
+      User.update( {name: 'Roy Scheffers'}, { name: 'R.G.G. Scheffers'} ),
+      done
+    );
+  });
+
+  it('A model class can update on record', (done) => {
+    // use when to update a unique entry
+    assertName(
+      User.findOneAndUpdate( {name: 'Roy Scheffers'}, { name: 'R.G.G. Scheffers'} ),
+      done
+    );
+  });
+
+  it('A model class can find a record with an ID and update', (done) => {
+    // use when to update a unique entry, this time use the ID
+    assertName(
+      User.findByIdAndUpdate( roy._id, { name: 'R.G.G. Scheffers'} ),
+      done
+    );
+  });
 });
