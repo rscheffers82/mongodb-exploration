@@ -32,13 +32,23 @@ describe('Deleting a user', () => {
       });
   });
 
-  it('class method findAndRemove', () => {
+  it('class method findAndRemove', (done) => {
     // User the User model class
-
+    User.findOneAndRemove( { name: 'Roy Scheffers' })
+      .then( () => User.findOne({ name: 'Roy Scheffers'}) )
+      .then( (user) => {
+        assert(user === null);
+        done();
+      });
   });
 
-  it('class method findByIdAndRemove', () => {
+  it('class method findByIdAndRemove', (done) => {
     // User the User model class
-
+    User.findByIdAndRemove( roy._id )
+      .then( () => User.findOne({ name: 'Roy Scheffers'}) )
+      .then( (user) => {
+        assert(user === null);
+        done();
+      });
   });
 });
