@@ -11,9 +11,14 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
-  postCount: Number,
   // subdocuments or imbedded documents
   posts: [Postschema]
+});
+
+// see the function() instead of () =>
+// This is because the this will then be linked to the user object
+UserSchema.virtual('postCount').get(function() {
+  return this.posts.length;
 });
 
 // user is what represents the collection. If it's absent mongoose will create it

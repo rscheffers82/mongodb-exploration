@@ -56,7 +56,7 @@ function assertName(operation, done) {
     );
   });
 
-  it('A user can have their postcount incremented by 1', (done) => {
+  xit('A user can have their postcount incremented by 1', (done) => {
     User.update({ name: 'Roy Scheffers'}, { $inc: { postCount: 11} })
       .then( () =>  User.findOne({ name: 'Roy Scheffers' }))
       .then( (user) => {
