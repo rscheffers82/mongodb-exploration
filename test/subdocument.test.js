@@ -21,4 +21,26 @@ describe('Subdocuments', () => {
       });
   });
 
+  it('Can add subdocuments to an existing record', (done) => {
+    const roy = new User({ name: 'Roy', posts: [] });
+    roy.save()
+      .then( () => User.findOne( { name: 'Roy' }) )
+      .then( (user) => {
+        user.posts.push({ title: 'My 2nd blog post' });
+        // ensure the promise is returned to the outer promise
+        return user.save();
+      })
+      .then( () => User.findOne( { name: 'Roy' }) )
+      .then( (user) => {
+                console.log(user);
+        assert(user.posts[0].title === 'My 2nd blog post');
+        done();
+      })
+
+  });
+
+  // it('', (done) => {
+  //
+  // });
+
 });
