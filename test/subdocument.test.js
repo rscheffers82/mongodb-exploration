@@ -32,15 +32,29 @@ describe('Subdocuments', () => {
       })
       .then( () => User.findOne( { name: 'Roy' }) )
       .then( (user) => {
-                console.log(user);
         assert(user.posts[0].title === 'My 2nd blog post');
         done();
       })
 
   });
 
-  // it('', (done) => {
-  //
-  // });
+  it('can remove an existing subdocument', (done) => {
+    const roy = new User({ name: 'Roy', posts: [{ title: 'My 3rd blog post' }] });
+
+    roy.save()
+      .then( () => User.findOne({ name: 'Roy' }) )
+      .then( (user) => {
+        // for removing sub-documents, we need to call save.
+        // this in contrary to roy.remove() for removing the record which does it automatically for us
+        user.posts[0].remove();
+        return user.save();
+      })
+      .then( () => User.findOne( { name: 'Roy' }) )
+      .then( (user) => {
+        assert( user.posts[0] === undefined );
+        done();
+      });
+
+  });
 
 });
