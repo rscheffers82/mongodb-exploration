@@ -12,7 +12,8 @@ const UserSchema = new Schema({
     required: [true, 'Name is required.']
   },
   // subdocuments or imbedded documents
-  posts: [Postschema]
+  posts: [Postschema],
+  likes: Number
 });
 
 // see the function() instead of () =>
