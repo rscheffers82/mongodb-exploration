@@ -6,7 +6,7 @@ describe('Updating records', () => {
   let roy;
 
   beforeEach( (done) => {
-    roy = new User({ name: 'Roy Scheffers'});
+    roy = new User({ name: 'Roy Scheffers', postCount: 0 });
     roy.save()
       .then( () => done() );
   });
@@ -55,4 +55,14 @@ function assertName(operation, done) {
       done
     );
   });
+
+  it('A user can have their postcount incremented by 1', (done) => {
+    User.update({ name: 'Roy Scheffers'}, { $inc: { postCount: 11} })
+      .then( () =>  User.findOne({ name: 'Roy Scheffers' }))
+      .then( (user) => {
+        assert(user.postCount === 11);
+        done();
+      });
+  });
+
 });

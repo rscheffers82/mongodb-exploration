@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  name: String
+  name: String,
+  postCount: Number
 });
 
 // user is what represents the collection. If it's absent mongoose will create it
