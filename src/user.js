@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Postschema = require('./post_schema');
 
 const UserSchema = new Schema({
   name: {
@@ -10,7 +11,9 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
-  postCount: Number
+  postCount: Number,
+  // subdocuments or imbedded documents
+  posts: [Postschema]
 });
 
 // user is what represents the collection. If it's absent mongoose will create it
