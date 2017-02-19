@@ -27,6 +27,19 @@ UserSchema.virtual('postCount').get(function() {
   return this.posts.length;
 });
 
+// user function instead of () => to make this available
+UserSchema.pre('remove', function(next) {
+  // this = user / roy
+  const BlogPost = mongoose.model('blogPost');
+
+  BlogPost.remove({ _id: { $in: this.blogPost } })
+    .then( () => next() );      // call next to move on to the next middleware
+  // go through the BlogPost model
+  // if the _id is $in blogPost (collection of user's blogposts)
+  // remove it
+});
+
+
 // user is what represents the collection. If it's absent mongoose will create it
 // User is the entire user class or user model, same thing
 // User represents the entire collection of users
