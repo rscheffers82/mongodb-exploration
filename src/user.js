@@ -13,7 +13,12 @@ const UserSchema = new Schema({
   },
   // subdocuments or imbedded documents
   posts: [Postschema],
-  likes: Number
+  likes: Number,
+  // own model
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 });
 
 // see the function() instead of () =>
