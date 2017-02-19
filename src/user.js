@@ -32,7 +32,7 @@ UserSchema.pre('remove', function(next) {
   // this = user / roy
   const BlogPost = mongoose.model('blogPost');
 
-  BlogPost.remove({ _id: { $in: this.blogPost } })
+  BlogPost.remove({ _id: { $in: this.blogPosts } })
     .then( () => next() );      // call next to move on to the next middleware
   // go through the BlogPost model
   // if the _id is $in blogPost (collection of user's blogposts)
